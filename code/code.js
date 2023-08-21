@@ -42,7 +42,13 @@ const loadMorePublications = (entry) => {
     if(entry[0].isIntersecting) loadPublications(3);
 };
 
-const publicationObserver = new IntersectionObserver(loadMorePublications);
+let loadOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+    };
+
+const publicationObserver = new IntersectionObserver(loadMorePublications, loadOptions);
 
 const loadPublications = async (amount) => {
     const request = await fetch("/resources/publications.json");
